@@ -76,7 +76,8 @@ class Saml2Controller extends Controller
             throw new \Exception("Could not log out");
         }
 
-        return redirect(config('saml2_settings.logoutRoute')); //may be set a configurable default
+        $logoutRoute = session('sso') === 'true' ? url('api/sso') : config('saml2_settings.logoutRoute');
+        return redirect($logoutRoute);
     }
 
     /**
